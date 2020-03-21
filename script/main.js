@@ -1,7 +1,13 @@
 var app = angular.module('mainApp', []);
 app.controller('mainController', function($scope, $sce) {
   
-  //$scope.purchaseAnalysisLink = $sce.trustAsResourceUrl("https://public.tableau.com/profile/lovelytics#!/vizhome/LovelyticsRetailDashboards/PurchaseAnalysis");
+  var divElement = document.getElementById('viz1584757337675');                    
+  var vizElement = divElement.getElementsByTagName('object')[0];                    
+  vizElement.style.width='1100px';vizElement.style.height='1150px';                    
+  var scriptElement = document.createElement('script');                    
+  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+  vizElement.parentNode.insertBefore(scriptElement, vizElement);
+
   $scope.showPurchaseAnalysis = function(){
       $scope.purchaseAnalysis = true;
       $scope.employeeTurnover = false;

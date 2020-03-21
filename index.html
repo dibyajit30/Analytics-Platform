@@ -20,30 +20,50 @@
                 <div class="about-me col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showSocialMedia()">Social Media</div>
             </div>
             <div class="content">
-                <div ng-if="dashboard">
+                <div ng-show="dashboard">
                     <div class="sub-menu">
                         <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showPurchaseAnalysis()">Purchase Analysis</div>
                         <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showEmployeeTurnover()">Employee Turnover</div>
                     </div>
                     <div class="tableau-dashboard">
-                        <div ng-if="purchaseAnalysis">
-                            <iframe width="1335px" height="894px" src="https://public.tableau.com/views/LovelyticsRetailDashboards/PurchaseAnalysis?:display_count=y&:origin=viz_share_link"></iframe>
+                        <div ng-show="purchaseAnalysis">
+                            <div class='tableauPlaceholder tableau' id='viz1584757337675' style='position: relative'>
+                                <noscript>
+                                    <a href='#'>
+                                        <img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Lo&#47;LovelyticsRetailDashboards&#47;PurchaseAnalysis&#47;1_rss.png' style='border: none' />
+                                    </a>
+                                </noscript>
+                                <object class='tableauViz'  style='display:none;'>
+                                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                                    <param name='embed_code_version' value='3' /> 
+                                    <param name='site_root' value='' />
+                                    <param name='name' value='LovelyticsRetailDashboards&#47;PurchaseAnalysis' />
+                                    <param name='tabs' value='yes' />
+                                    <param name='toolbar' value='yes' />
+                                    <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Lo&#47;LovelyticsRetailDashboards&#47;PurchaseAnalysis&#47;1.png' /> 
+                                    <param name='animate_transition' value='yes' />
+                                    <param name='display_static_image' value='yes' />
+                                    <param name='display_spinner' value='yes' />
+                                    <param name='display_overlay' value='yes' />
+                                    <param name='display_count' value='yes' />
+                                </object>
+                            </div>                 
                         </div>
-                        <div ng-if="employeeTurnover">
+                        <div ng-show="employeeTurnover">
                             employeeTurnover
                         </div>
                     </div>
                 </div>
-                <div ng-if="socialMedia">
+                <div ng-show="socialMedia">
                     <div class="sub-menu">
                         <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showFacebook()">Facebook</div>
                         <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showInstagram()">Instagram</div>
                     </div>
                     <div class="social-media">
-                        <div ng-if="facebook">
+                        <div ng-show="facebook">
                             Facebook
                         </div>
-                        <div ng-if="instagram">
+                        <div ng-show="instagram">
                             Instagram
                         </div>
                     </div>
