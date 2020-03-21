@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Analytics Portal</title>
+        <link rel="stylesheet" href="style/main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="script/main.js"></script>
+    </head>
+
+    <body ng-app="mainApp" ng-controller="mainController">
+        <header>
+            <div class="icon col-xs-3 col-md-3 col-sm-3 col-lg-3"> <img src="resources/iconTop.jpeg" alt="lovelytics icon"/></div>
+            <div class="text title col-xs-9 col-md-9 col-sm-9 col-lg-9">Analytics Portal</div>
+        </header>
+        <section class="main-section">
+            <div class="main-menu">
+                <div class="about-llama col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showDashboard()">Dashboard</div>
+                <div class="about-me col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showSocialMedia()">Social Media</div>
+            </div>
+            <div class="content">
+                <div ng-if="dashboard">
+                    <div class="sub-menu">
+                        <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showPurchaseAnalysis()">Purchase Analysis</div>
+                        <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showEmployeeTurnover()">Employee Turnover</div>
+                    </div>
+                    <div class="tableau-dashboard">
+                        <div ng-if="purchaseAnalysis">
+                            <iframe width="1335px" height="894px" src="https://public.tableau.com/views/LovelyticsRetailDashboards/PurchaseAnalysis?:display_count=y&:origin=viz_share_link"></iframe>
+                        </div>
+                        <div ng-if="employeeTurnover">
+                            employeeTurnover
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="socialMedia">
+                    <div class="sub-menu">
+                        <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showFacebook()">Facebook</div>
+                        <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showInstagram()">Instagram</div>
+                    </div>
+                    <div class="social-media">
+                        <div ng-if="facebook">
+                            Facebook
+                        </div>
+                        <div ng-if="instagram">
+                            Instagram
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer></footer>
+    </body>
+</html>
