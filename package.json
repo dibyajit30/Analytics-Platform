@@ -1,0 +1,23 @@
+{
+  "name": "Analytics-Platform",
+  "version": "1.0.0",
+  "description": "Integrated analytics platform for internal users of retail company",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dibyajit30/Analytics-Platform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dibyajit30/Analytics-Platform/issues"
+  },
+  "homepage": "https://github.com/dibyajit30/Analytics-Platform#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
