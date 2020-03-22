@@ -77,13 +77,12 @@
                     </div>
                     <div class="social-media">
                         <div ng-show="facebook">
-                            <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="false">
-                            </div>
-                            <div ng-if="facebookLoginDetails.status == 'connected'" class="fb fb-loggedin">
+                            <div ng-show="facebookLoggedin" class="fb fb-loggedin">
+                                <button class="" ng-click="facebookLogout()">Logout of facebook</button>
                                 Welcome {{facebookLoginDetails.authResponse.userID}}
                             </div>
-                            <div ng-if="facebookLoginDetails.status != 'connected'" class="fb fb-loggedout">
-                            
+                            <div ng-show="!facebookLoggedin" class="fb fb-loggedout">
+                                <button class="" ng-click="facebookLogin()">Connect with facebook</button>
                             </div>
                         </div>
                         <div ng-show="instagram">

@@ -1,5 +1,5 @@
 var app = angular.module('mainApp', []);
-app.controller('mainController', function($scope, $sce) {
+app.controller('mainController', function($scope, $timeout) {
   
   // Purchase analysis dashboard content
   var divElement = document.getElementById('viz1584757337675');                    
@@ -40,7 +40,24 @@ app.controller('mainController', function($scope, $sce) {
   }
 
   $scope.facebookLogin = function(){
+    FB.login(function(response){
+      $scope.facebookLoginDetails = response; 
+    });
+    $timeout(function(){
+      if($scope.facebookLoginDetails.status === 'connected'){
+        $scope.facebookLoggedin = true;
+      }
+      else{
+        $scope.facebookLoggedin = false;
+      }
+    },5000);
+  }
 
+  $scope.facebookLogout = function(){
+    FB.logout(function(response){
+      $scope.facebookLoginDetails = response;
+    });
+    $scope.facebookLoggedin = false;
   }
 
   $scope.showFacebook = function(){
@@ -48,7 +65,12 @@ app.controller('mainController', function($scope, $sce) {
       $scope.instagram = false;
       FB.getLoginStatus(function(response) {
         $scope.facebookLoginDetails = response;
-        console.log($scope.facebookLoginDetails);
+        if(response.status === 'connected'){
+          $scope.facebookLoggedin = true;
+        }
+        else{
+          $scope.facebookLoggedin = false;
+        }
       });
   }
 
