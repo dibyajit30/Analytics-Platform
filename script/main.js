@@ -112,11 +112,22 @@ app.controller('mainController', function($scope, $timeout, $http) {
 
   if(window.location.href.includes("code=")){
     var code = window.location.href.substring(window.location.href.indexOf("code=")+5,window.location.href.indexOf("#_"));
-    var data = {client_id: 1082737448785994, client_secret: "79b6da878350944fbbe6d37aa0cf625e", grant_type: "authorization_code", redirect_uri: "https://dibyajit30.github.io/Analytics-Platform/", code: code};
     var url = "https://api.instagram.com/oauth/access_token";
-    $http.get(url, data)
-    .then(function(response) {
-      console.log(response);
+    var fd = new FormData();    
+    fd.append( 'client_id', '1082737448785994' );
+    fd.append( 'client_secret', '79b6da878350944fbbe6d37aa0cf625e' );
+    fd.append("grant_type", "authorization_code");
+    fd.append("redirect_uri", "https://dibyajit30.github.io/Analytics-Platform/");
+    fd.append("code", code);
+    $.ajax({
+      url: url,
+      data: fd,
+      processData: false,
+      contentType: false,
+      type: 'POST',
+      success: function(data){
+        console.log(data);
+      }
     });
     $scope.showSocialMedia();
     $scope.showInstagram(true);
