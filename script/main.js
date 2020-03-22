@@ -113,15 +113,16 @@ app.controller('mainController', function($scope, $timeout, $http) {
   $scope.sendEmail = function() {
     Email.send({
     Host: "smtp.gmail.com",
+    Port: 587,
     Username : "developer.dibyajit@gmail.com",
     Password : "Developer@123",
     To : 'dibyajit30@gmail.com',
     From : "developer.dibyajit@gmail.com",
     Subject : "Email authentication",
     Body : "Click on this link to authenticate.",
-    }).then(
-      message => alert("mail sent successfully")
-    );
+    }).then(function(response){
+      console.log(response);
+    });
   }
 
   $scope.isLoggedin = false;
