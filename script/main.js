@@ -114,7 +114,7 @@ app.controller('mainController', function($scope, $timeout, $http) {
     var code = window.location.href.substring(window.location.href.indexOf("code=")+5,window.location.href.indexOf("#_"));
     var data = {client_id: 1082737448785994, client_secret: "79b6da878350944fbbe6d37aa0cf625e", grant_type: "authorization_code", redirect_uri: "https://dibyajit30.github.io/Analytics-Platform/", code: code};
     var url = "https://api.instagram.com/oauth/access_token";
-    $http.post(url, data)
+    $http.get(url, data)
     .then(function(response) {
       console.log(response);
     });
