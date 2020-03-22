@@ -110,7 +110,10 @@ app.controller('mainController', function($scope, $timeout, $http) {
   }
 
   if(window.location.href.includes("code=")){
+    var code = window.location.href.substring(window.location.href.indexOf("code=")+5,window.location.href.indexOf("#_"));
+    $scope.showSocialMedia();
     $scope.showInstagram(true);
+    console.log("code="+code);
   }
   else{
     $scope.showDashboard();
