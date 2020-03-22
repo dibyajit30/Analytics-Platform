@@ -2,29 +2,29 @@ var app = angular.module('mainApp', []);
 app.controller('mainController', function($scope, $timeout, $http) {
   
   // Purchase analysis dashboard content
-  var divElement = document.getElementById('viz1584757337675');                    
-  var vizElement = divElement.getElementsByTagName('object')[0];                    
-  vizElement.style.width='1100px';vizElement.style.height='1150px';                    
-  var scriptElement = document.createElement('script');                    
-  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
-  vizElement.parentNode.insertBefore(scriptElement, vizElement);
+  // var divElement = document.getElementById('viz1584757337675');                    
+  // var vizElement = divElement.getElementsByTagName('object')[0];                    
+  // vizElement.style.width='1100px';vizElement.style.height='1150px';                    
+  // var scriptElement = document.createElement('script');                    
+  // scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+  // vizElement.parentNode.insertBefore(scriptElement, vizElement);
 
-  // Employee turnover dashboard content
-  var divElement = document.getElementById('viz1584764713356');
-  var vizElement = divElement.getElementsByTagName('object')[0];
-  if (divElement.offsetWidth > 800) {
-      vizElement.style.width = '1000px';
-      vizElement.style.height = '1027px';
-  } else if (divElement.offsetWidth > 500) {
-      vizElement.style.width = '1000px';
-      vizElement.style.height = '1027px';
-  } else {
-      vizElement.style.width = '100%';
-      vizElement.style.height = '2127px';
-  }
-  var scriptElement = document.createElement('script');
-  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-  vizElement.parentNode.insertBefore(scriptElement, vizElement);
+  // // Employee turnover dashboard content
+  // var divElement = document.getElementById('viz1584764713356');
+  // var vizElement = divElement.getElementsByTagName('object')[0];
+  // if (divElement.offsetWidth > 800) {
+  //     vizElement.style.width = '1000px';
+  //     vizElement.style.height = '1027px';
+  // } else if (divElement.offsetWidth > 500) {
+  //     vizElement.style.width = '1000px';
+  //     vizElement.style.height = '1027px';
+  // } else {
+  //     vizElement.style.width = '100%';
+  //     vizElement.style.height = '2127px';
+  // }
+  // var scriptElement = document.createElement('script');
+  // scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+  // vizElement.parentNode.insertBefore(scriptElement, vizElement);
 
   // Facebook app register
   
@@ -110,7 +110,21 @@ app.controller('mainController', function($scope, $timeout, $http) {
       $scope.showFacebook();
   }
 
-  $scope.isLoggedin = true;
+  $scope.sendEmail = function() {
+    Email.send({
+    Host: "smtp.gmail.com",
+    Username : "developer.dibyajit@gmail.com",
+    Password : "Developer@123",
+    To : 'dibyajit30@gmail.com',
+    From : "developer.dibyajit@gmail.com",
+    Subject : "Email authentication",
+    Body : "Click on this link to authenticate.",
+    }).then(
+      message => alert("mail sent successfully")
+    );
+  }
+
+  $scope.isLoggedin = false;
   if(window.location.href.includes("code=")){
     var code = window.location.href.substring(window.location.href.indexOf("code=")+5,window.location.href.indexOf("#_"));
     var url = "https://api.instagram.com/oauth/access_token";
@@ -138,6 +152,6 @@ app.controller('mainController', function($scope, $timeout, $http) {
     $scope.showInstagram(true);
   }
   else{
-    $scope.showDashboard();
+    //$scope.showDashboard();
   }
 });
