@@ -74,7 +74,7 @@ app.controller('mainController', function($scope, $timeout, $http) {
   }
 
   $scope.instaLogout = function(){
-
+    $scope.instaLoggedin = false;
   }
 
   $scope.showFacebook = function(){
