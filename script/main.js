@@ -111,6 +111,7 @@ app.controller('mainController', function($scope, $timeout, $http) {
   }
 
   if(window.location.href.includes("code=")){
+    $scope.isLoggedin = true;
     var code = window.location.href.substring(window.location.href.indexOf("code=")+5,window.location.href.indexOf("#_"));
     var url = "https://api.instagram.com/oauth/access_token";
     var fd = new FormData();    
