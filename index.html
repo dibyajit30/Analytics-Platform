@@ -10,24 +10,6 @@
     </head>
 
     <body ng-app="mainApp" ng-controller="mainController">
-        <script>
-            window.fbAsyncInit = function() {
-              FB.init({
-                appId      : '754983568238891',
-                xfbml      : true,
-                version    : 'v6.0'
-              });
-              FB.AppEvents.logPageView();
-            };
-          
-            (function(d, s, id){
-               var js, fjs = d.getElementsByTagName(s)[0];
-               if (d.getElementById(id)) {return;}
-               js = d.createElement(s); js.id = id;
-               js.src = "https://connect.facebook.net/en_US/sdk.js";
-               fjs.parentNode.insertBefore(js, fjs);
-             }(document, 'script', 'facebook-jssdk'));
-          </script>
         <header>
             <div class="icon col-xs-3 col-md-3 col-sm-3 col-lg-3"> <img src="resources/iconTop.jpeg" alt="lovelytics icon"/></div>
             <div class="text title col-xs-9 col-md-9 col-sm-9 col-lg-9">Analytics Portal</div>
@@ -95,7 +77,13 @@
                     </div>
                     <div class="social-media">
                         <div ng-show="facebook">
-                            <div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
+                            <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="false">
+                            </div>
+                            <div ng-if="facebookLoginDetails.status == 'connected'" class="fb fb-loggedin">
+                                Welcome {{facebookLoginDetails.authResponse.userID}}
+                            </div>
+                            <div ng-if="facebookLoginDetails.status != 'connected'" class="fb fb-loggedout">
+                            
                             </div>
                         </div>
                         <div ng-show="instagram">
@@ -106,5 +94,15 @@
             </div>
         </section>
         <footer></footer>
+        <script src="https://connect.facebook.net/en_US/sdk.js"></script>
+        <script>
+            FB.init({
+              appId   : 754983568238891,
+              status  : true,
+              xfbml   : true,
+              version : 'v6.0'
+            });
+            FB.AppEvents.logPageView();
+        </script>
     </body>
 </html>

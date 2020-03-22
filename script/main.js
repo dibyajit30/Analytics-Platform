@@ -1,6 +1,7 @@
 var app = angular.module('mainApp', []);
 app.controller('mainController', function($scope, $sce) {
   
+  // Purchase analysis dashboard content
   var divElement = document.getElementById('viz1584757337675');                    
   var vizElement = divElement.getElementsByTagName('object')[0];                    
   vizElement.style.width='1100px';vizElement.style.height='1150px';                    
@@ -8,6 +9,7 @@ app.controller('mainController', function($scope, $sce) {
   scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
   vizElement.parentNode.insertBefore(scriptElement, vizElement);
 
+  // Employee turnover dashboard content
   var divElement = document.getElementById('viz1584764713356');
   var vizElement = divElement.getElementsByTagName('object')[0];
   if (divElement.offsetWidth > 800) {
@@ -24,6 +26,9 @@ app.controller('mainController', function($scope, $sce) {
   scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
   vizElement.parentNode.insertBefore(scriptElement, vizElement);
 
+  // Facebook app register
+  
+
   $scope.showPurchaseAnalysis = function(){
       $scope.purchaseAnalysis = true;
       $scope.employeeTurnover = false;
@@ -34,9 +39,17 @@ app.controller('mainController', function($scope, $sce) {
     $scope.purchaseAnalysis = false;
   }
 
+  $scope.facebookLogin = function(){
+
+  }
+
   $scope.showFacebook = function(){
       $scope.facebook = true;
       $scope.instagram = false;
+      FB.getLoginStatus(function(response) {
+        $scope.facebookLoginDetails = response;
+        console.log($scope.facebookLoginDetails);
+      });
   }
 
   $scope.showInstagram = function(){

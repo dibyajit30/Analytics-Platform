@@ -19,5 +19,8 @@
   "homepage": "https://github.com/dibyajit30/Analytics-Platform#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "https-localhost": "^4.5.2"
   }
 }
