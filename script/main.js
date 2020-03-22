@@ -110,8 +110,8 @@ app.controller('mainController', function($scope, $timeout, $http) {
       $scope.showFacebook();
   }
 
+  $scope.isLoggedin = true;
   if(window.location.href.includes("code=")){
-    $scope.isLoggedin = true;
     var code = window.location.href.substring(window.location.href.indexOf("code=")+5,window.location.href.indexOf("#_"));
     var url = "https://api.instagram.com/oauth/access_token";
     var fd = new FormData();    
@@ -120,15 +120,19 @@ app.controller('mainController', function($scope, $timeout, $http) {
     fd.append("grant_type", "authorization_code");
     fd.append("redirect_uri", "https://dibyajit30.github.io/Analytics-Platform/");
     fd.append("code", code);
-    $.ajax({
-      url: url,
-      data: fd,
-      processData: false,
-      contentType: false,
-      type: 'POST',
-      success: function(data){
-        console.log(data);
-      }
+    // $.ajax({
+    //   url: url,
+    //   data: fd,
+    //   processData: false,
+    //   contentType: false,
+    //   type: 'POST',
+    //   success: function(data){
+    //     console.log(data);
+    //   }
+    // });
+    $http.post(url, fd)
+    .then(function(response) {
+      console.log(response);
     });
     $scope.showSocialMedia();
     $scope.showInstagram(true);
