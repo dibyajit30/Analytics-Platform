@@ -68,8 +68,9 @@ app.controller('mainController', function($scope, $timeout, $http) {
     $scope.facebookLoggedin = false;
   }
 
+  var instaAuthURL = "https://api.instagram.com/oauth/authorize/?client_id=1082737448785994&redirect_uri=https://dibyajit30.github.io/Analytics-Platform/&scope=user_profile,user_media&response_type=code";
   $scope.instaLogin = function(){
-    var url = "https://api.instagram.com/oauth/authorize/?client_id=1082737448785994&redirect_uri=https://dibyajit30.github.io/Analytics-Platform/&scope=user_profile,user_media&response_type=code";
+    var url = instaAuthURL;
     window.location.href = url;
   }
 
@@ -111,9 +112,14 @@ app.controller('mainController', function($scope, $timeout, $http) {
 
   if(window.location.href.includes("code=")){
     var code = window.location.href.substring(window.location.href.indexOf("code=")+5,window.location.href.indexOf("#_"));
+    var data = {client_id: 1082737448785994, client_secret: "79b6da878350944fbbe6d37aa0cf625e", grant_type: "authorization_code", redirect_uri: "https://dibyajit30.github.io/Analytics-Platform/", code: code};
+    var url = "https://api.instagram.com/oauth/access_token";
+    $http.post(url, data)
+    .then(function(response) {
+      console.log(response);
+    });
     $scope.showSocialMedia();
     $scope.showInstagram(true);
-    console.log("code="+code);
   }
   else{
     $scope.showDashboard();
