@@ -1,5 +1,5 @@
 var app = angular.module('mainApp', []);
-app.controller('mainController', function($scope, $timeout) {
+app.controller('mainController', function($scope, $timeout, $http) {
   
   // Purchase analysis dashboard content
   var divElement = document.getElementById('viz1584757337675');                    
@@ -46,6 +46,14 @@ app.controller('mainController', function($scope, $timeout) {
     $timeout(function(){
       if($scope.facebookLoginDetails.status === 'connected'){
         $scope.facebookLoggedin = true;
+        FB.api(
+          "/"+$scope.facebookLoginDetails.authResponse.userID+"/feed",
+          function (response) {
+            if (response && !response.error) {
+              console.log(response);
+            }
+          }
+        );
       }
       else{
         $scope.facebookLoggedin = false;
@@ -58,6 +66,15 @@ app.controller('mainController', function($scope, $timeout) {
       $scope.facebookLoginDetails = response;
     });
     $scope.facebookLoggedin = false;
+  }
+
+  $scope.instaLogin = function(){
+    var url = "https://api.instagram.com/oauth/authorize/?client_id=1082737448785994&redirect_uri=https://dibyajit30.github.io/Analytics-Platform/&scope=user_profile,user_media&response_type=code";
+    window.location.href = url;
+  }
+
+  $scope.instaLogout = function(){
+
   }
 
   $scope.showFacebook = function(){
@@ -74,9 +91,10 @@ app.controller('mainController', function($scope, $timeout) {
       });
   }
 
-  $scope.showInstagram = function(){
+  $scope.showInstagram = function(loggedin){
     $scope.instagram = true;
     $scope.facebook = false;
+    $scope.instaLoggedin = loggedin;
   }
   
   $scope.showDashboard = function(){
@@ -91,6 +109,10 @@ app.controller('mainController', function($scope, $timeout) {
       $scope.showFacebook();
   }
 
-  $scope.showDashboard();
-
+  if(window.location.href.includes("code=")){
+    $scope.showInstagram(true);
+  }
+  else{
+    $scope.showDashboard();
+  }
 });
