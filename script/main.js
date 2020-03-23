@@ -1,5 +1,5 @@
 var app = angular.module('mainApp', []);
-app.controller('mainController', function($scope, $timeout, $http, $document) {
+app.controller('mainController', function($scope, $timeout, $http, $document, $httpParamSerializer) {
   
   // Purchase analysis dashboard content
   var divElement = document.getElementById('viz1584757337675');                    
@@ -112,7 +112,14 @@ app.controller('mainController', function($scope, $timeout, $http, $document) {
     var link = window.location.origin + "/authenticate.html";
     var emailBody = "Click on this link to authenticate- " + link;
     var emailId = document.getElementById("signupEmail").value;
-    console.log(emailId);
+    var data = {"id": document.getElementById("signupID").value, "password": document.getElementById("signupPassword").value};
+    $http({
+      method : "POST",
+      url : window.location.origin+"/addUser",
+      params : data
+    }).then(function(response){
+      console.log(response);
+    });
     Email.send({
     Host: "smtp.gmail.com",
     Port: 587,
