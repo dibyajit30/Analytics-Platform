@@ -109,7 +109,7 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
   }
 
   $scope.sendEmail = function() {
-    var link = window.location.origin + "/authenticate.html";
+    var link = window.location.origin + "/authenticate.html?user=" + document.getElementById("signupID").value;
     var emailBody = "Click on this link to authenticate- " + link;
     var emailId = document.getElementById("signupEmail").value;
     var data = {"id": document.getElementById("signupID").value, "password": document.getElementById("signupPassword").value};
@@ -146,6 +146,7 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
           if(profiles[i].id === id && profiles[i].password === password && profiles[i].auth === "yes"){
             access = true;
             $scope.showDashboard();
+            break;
           }
         }
         if(access === false){

@@ -28,4 +28,19 @@ app.post("/addUser", function(request, response, next) {
     return response.json({"welcome":"back"}, 200);
 });
 
+app.post("/authUser", function(request, response, next){
+    var profiles = readFromFile();
+    if(profiles === undefined){
+        profiles = {"users" : []};
+    }
+    for(var i=0; i<profiles.users.length; i++){
+        if(profiles.users[i].id === request.query.id){
+            profiles.users[i].auth = "yes";
+            break;
+        }
+    }
+    writeToFile(profiles);
+    return response.json({"welcome":"back"}, 200);
+});
+
 app.listen(443)
