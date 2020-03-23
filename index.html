@@ -15,12 +15,53 @@
             <div class="icon col-xs-3 col-md-3 col-sm-3 col-lg-3"> <img src="resources/iconTop.jpeg" alt="lovelytics icon"/></div>
             <div class="text title col-xs-9 col-md-9 col-sm-9 col-lg-9">Analytics Portal</div>
         </header>
-        <section ng-if="!isLoggedin">
-            <form method="post">
-                <input type="button" value="Send Email" ng-click="sendEmail()"/>
-            </form>
+        <section ng-show="!isLoggedin" class="login-page">
+            <div ng-show="signin">
+                <p>Sign in</p>
+                <form name="signinForm" id="signinForm">
+                    <label>User Id:</label>
+                    <input type="text" id="userID"/><br/>
+                    <label>Password:</label>
+                    <input type="password" id="userPassword"><br/>
+                    <input type="button" value="Submit" ng-click="authenticateUser()">
+                </form>
+                <p>
+                    <input type="button" value="Sign up" ng-click="signup=true;signin=false">
+                    <input type="button" value="Admin sign in" ng-click="adminSignin=true;signin=false">
+                </p>
+            </div>
+            <div ng-show="signup">
+                <p>Sign up</p>
+                <form name="signupForm" id="signupForm">
+                    <label>User Id:</label>
+                    <input type="text" id="signupID"/><br/>
+                    <label>Password:</label>
+                    <input type="password" id="signupPassword"><br/>
+                    <label>Email ID:</label>
+                    <input type="email" id="signupEmail"><br/>
+                    <input type="button" value="Submit" ng-click="sendEmail()">
+                </form>
+                <p>
+                    <input type="button" value="Sign in" ng-click="signin=true;signup=false">
+                    <input type="button" value="Admin sign in" ng-click="adminSignin=true;signup=false">
+                </p>
+            </div>
+            <div ng-show="adminSignin">
+                <p>Admin sign in</p>
+                <form name="adminSigninForm">
+                    <label>Admin Id:</label>
+                    <input type="text" id="adminID"/><br/>
+                    <label>Password:</label>
+                    <input type="password" id="adminPassword"><br/>
+                    <input type="button" value="Submit" ng-click="authenticateAdmin()">
+                </form>
+                <p>
+                    <input type="button" value="Sign in" ng-click="signin=true;adminSignin=false">
+                    <input type="button" value="Sign up" ng-click="signup=true;adminSignin=false">
+                </p>
+            </div>
         </section>
-        <section ng-if="isLoggedin" class="main-section">
+        <section ng-show="isLoggedin" class="main-section">
             <div class="main-menu">
                 <div class="about-llama col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showDashboard()">Dashboard</div>
                 <div class="about-me col-xs-6 col-md-6 col-sm-6 col-lg-6 clickable" ng-click="showSocialMedia()">Social Media</div>
