@@ -44,37 +44,30 @@ app.post("/authUser", function(request, response, next){
 });
 
 app.post("/instaAccessToken", function(request, response, next){
-    console.log("insta access");
-    var fd = new FormData();    
-    fd.append( 'client_id', request.query.client_id );
-    fd.append( 'client_secret', request.query.client_secret );
-    fd.append("grant_type", request.query.grant_type);
-    fd.append("redirect_uri", request.query.redirect_uri);
-    fd.append("code", request.query.code);
-    const https = require('https');
-    const data = JSON.stringify({
-        client_id : request.query.client_id,
-        client_secret : request.query.client_secret,
-        grant_type : request.query.grant_type,
-        redirect_uri : request.query.redirect_uri,
-        code : request.query.code
-    });
-    const options = {
-    hostname: 'https://api.instagram.com/oauth/access_token',
-    port: 443,
-    //path: '/todos',
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': data.length
-    }
-    }
+    var httpRequest = require('request');
     var instaResponse;
-    const req = https.request(options, function(response){
-        instaResponse = response;
-    });
-    req.write(data)
-    req.end()
+    
+    var options = {
+		url: 'https://api.instagram.com/oauth/access_token',
+		method: 'POST',
+		form: {
+			client_id: request.query.client_id,
+			client_secret: request.query.client_secret,
+			grant_type: 'authorization_code',
+			redirect_uri: request.query.redirect_uri,
+			code: request.query.code
+		}
+	};
+	httpRequest(options, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+            var user = JSON.parse(body);
+            instaResponse = user;
+			console.log(user);
+        }
+        else{
+            console.log(error);
+        }
+	});
     return instaResponse;
 });
 
