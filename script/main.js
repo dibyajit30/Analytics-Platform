@@ -139,7 +139,7 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
     var password = document.getElementById("userPassword").value;
     $http.get("resources/user_data.json")
     .then(function(response) {
-      if(response.statusText === "OK"){
+      if(response.status/100 === 2){
         var profiles = response.data.users;
         var access = false;
         for(var i=0; i<profiles.length; i++){
