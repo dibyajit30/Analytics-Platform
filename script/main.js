@@ -1,5 +1,5 @@
 var app = angular.module('mainApp', []);
-app.controller('mainController', function($scope, $timeout, $http) {
+app.controller('mainController', function($scope, $timeout, $http, $document) {
   
   // Purchase analysis dashboard content
   var divElement = document.getElementById('viz1584757337675');                    
@@ -109,22 +109,50 @@ app.controller('mainController', function($scope, $timeout, $http) {
   }
 
   $scope.sendEmail = function() {
+    var link = window.location.origin + "/authenticate.html";
+    var emailBody = "Click on this link to authenticate- " + link;
+    var emailId = document.getElementById("signupEmail").value;
+    console.log(emailId);
     Email.send({
     Host: "smtp.gmail.com",
     Port: 587,
     Username : "developer.dibyajit@gmail.com",
     Password : "Developer@123",
-    To : 'dibyajit30@gmail.com',
+    To : emailId,
     From : "developer.dibyajit@gmail.com",
-    Subject : "Email authentication",
-    Body : "Click on this link to authenticate.",
+    Subject : "Email authentication for Analytics Platform",
+    Body : emailBody,
     }).then(function(response){
       console.log(response);
     });
   }
 
   $scope.authenticateUser = function(){
-    $scope.showDashboard();
+    var id = document.getElementById("userID").value;
+    var password = document.getElementById("userPassword").value;
+    $http.get("resources/user_data.json")
+    .then(function(response) {
+      if(response.statusText === "OK"){
+        var profiles = response.data.users;
+        var access = false;
+        for(var i=0; i<profiles.length; i++){
+          if(profiles[i].id === id && profiles[i].password === password && profiles[i].auth === "yes"){
+            access = true;
+            $scope.showDashboard();
+          }
+        }
+        if(access === false){
+          console.log("Access denied");
+        }
+      }
+      else{
+        console.log("Access denied");
+      }
+    });
+  }
+
+  $scope.authenticateAdmin = function(){
+
   }
 
   if(window.location.href.includes("code=")){

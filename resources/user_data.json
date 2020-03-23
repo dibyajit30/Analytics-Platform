@@ -1,0 +1,6 @@
+{
+    "users" : [
+        {"id" : "dib", "password" : "ban", "auth" : "yes"},
+        {"id" : "dev", "password" : "js", "auth" : "no"}
+    ]
+}

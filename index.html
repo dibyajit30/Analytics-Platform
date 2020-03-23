@@ -20,10 +20,10 @@
                 <p>Sign in</p>
                 <form name="signinForm" id="signinForm">
                     <label>User Id:</label>
-                    <input type="text" id="userID"/><br/>
+                    <input type="text" id="userID" required/><br/>
                     <label>Password:</label>
-                    <input type="password" id="userPassword"><br/>
-                    <input type="button" value="Submit" ng-click="authenticateUser()">
+                    <input type="password" id="userPassword" required><br/>
+                    <input type="submit" value="Submit" ng-click="authenticateUser()">
                 </form>
                 <p>
                     <input type="button" value="Sign up" ng-click="signup=true;signin=false">
@@ -34,12 +34,12 @@
                 <p>Sign up</p>
                 <form name="signupForm" id="signupForm">
                     <label>User Id:</label>
-                    <input type="text" id="signupID"/><br/>
+                    <input type="text" id="signupID" required/><br/>
                     <label>Password:</label>
-                    <input type="password" id="signupPassword"><br/>
+                    <input type="password" id="signupPassword" required><br/>
                     <label>Email ID:</label>
-                    <input type="email" id="signupEmail"><br/>
-                    <input type="button" value="Submit" ng-click="sendEmail()">
+                    <input type="email" id="signupEmail" required><br/>
+                    <input type="submit" value="Submit" ng-click="sendEmail()">
                 </form>
                 <p>
                     <input type="button" value="Sign in" ng-click="signin=true;signup=false">
@@ -50,10 +50,10 @@
                 <p>Admin sign in</p>
                 <form name="adminSigninForm">
                     <label>Admin Id:</label>
-                    <input type="text" id="adminID"/><br/>
+                    <input type="text" id="adminID" required/><br/>
                     <label>Password:</label>
-                    <input type="password" id="adminPassword"><br/>
-                    <input type="button" value="Submit" ng-click="authenticateAdmin()">
+                    <input type="password" id="adminPassword" required><br/>
+                    <input type="submit" value="Submit" ng-click="authenticateAdmin()">
                 </form>
                 <p>
                     <input type="button" value="Sign in" ng-click="signin=true;adminSignin=false">
