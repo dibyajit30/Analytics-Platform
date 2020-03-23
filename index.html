@@ -126,7 +126,7 @@
                         <div ng-show="facebook">
                             <div ng-show="facebookLoggedin" class="fb fb-loggedin">
                                 <button class="" ng-click="facebookLogout()">Logout of facebook</button>
-                                Welcome {{facebookLoginDetails.authResponse.userID}}
+                                Welcome {{fbUserName}}
                             </div>
                             <div ng-show="!facebookLoggedin" class="fb fb-loggedout">
                                 <button class="" ng-click="facebookLogin()">Connect with facebook</button>

@@ -46,7 +46,7 @@ app.post("/authUser", function(request, response, next){
 app.post("/instaAccessToken", function(request, response, next){
     var httpRequest = require('request');
     var instaResponse;
-    
+    console.log("insta access");
     var options = {
 		url: 'https://api.instagram.com/oauth/access_token',
 		method: 'POST',

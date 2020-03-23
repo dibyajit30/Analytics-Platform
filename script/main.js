@@ -44,13 +44,16 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
       if($scope.facebookLoginDetails.status === 'connected'){
         $scope.facebookLoggedin = true;
         FB.api(
-          "/"+$scope.facebookLoginDetails.authResponse.userID+"/feed",
+          "/"+$scope.facebookLoginDetails.authResponse.userID,
           function (response) {
             if (response && !response.error) {
               console.log(response);
+              console.log(response.name);
+              $scope.fbUserName = response.name;
             }
           }
         );
+        
       }
       else{
         $scope.facebookLoggedin = false;
@@ -169,7 +172,7 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
     var data = {'client_id' : '1082737448785994', 'client_secret' : '79b6da878350944fbbe6d37aa0cf625e',
     "grant_type" : "authorization_code", "redirect_uri" : "https://dibyajit30.github.io/Analytics-Platform/",
     "code" : code};
-    
+    console.log(code);
     $http({
       method : "POST",
       url : "https://localhost/instaAccessToken",
