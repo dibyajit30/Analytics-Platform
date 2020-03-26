@@ -41,6 +41,7 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
     var login = function(){
       FB.login(function(response){
         $scope.facebookLoginDetails = response; 
+        console.log(response);
         if($scope.facebookLoginDetails.status === 'connected'){
           FB.api(
             "/"+$scope.facebookLoginDetails.authResponse.userID,
@@ -52,12 +53,23 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
             }
           );
           FB.api(
-            "/"+$scope.facebookLoginDetails.authResponse.userID+"/post",
-            function (response) {
+            '/me/posts',
+            'GET',
+            {},
+            function(response) {
               console.log(response);
-              if (response && !response.error) {
-                $scope.fbPosts = response;
+              $scope.fbPosts = [];
+              for(var i=0; i<15; i++){
+                FB.api(
+                  response.data[i].id,
+                  function (response) {
+                    if (response && !response.error) {
+                      $scope.fbPosts.push(response);
+                    }
+                  }
+                );
               }
+              console.log($scope.fbPosts);
             }
           );
         }
