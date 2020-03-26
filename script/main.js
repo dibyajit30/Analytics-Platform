@@ -203,6 +203,7 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
     // }).then(function(response){
     //   console.log(response);
     // });
+    $scope.isLoggedin = true;
     $scope.showSocialMedia();
     $scope.showInstagram(true);
   }
