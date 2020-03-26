@@ -59,17 +59,11 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
             function(response) {
               console.log(response);
               $scope.fbPosts = [];
-              for(var i=0; i<15; i++){
-                FB.api(
-                  response.data[i].id,
-                  function (response) {
-                    if (response && !response.error) {
-                      $scope.fbPosts.push(response);
-                    }
-                  }
-                );
+              for(var i=0; i<5; i++){
+                if(response.data[i].message !== undefined){
+                  $scope.fbPosts.push(response.data[i].message);
+                }
               }
-              console.log($scope.fbPosts);
             }
           );
         }
@@ -202,13 +196,13 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
     "grant_type" : "authorization_code", "redirect_uri" : "https://dibyajit30.github.io/Analytics-Platform/",
     "code" : code};
     console.log(code);
-    $http({
-      method : "POST",
-      url : "https://localhost/instaAccessToken",
-      params : data
-    }).then(function(response){
-      console.log(response);
-    });
+    // $http({
+    //   method : "POST",
+    //   url : "https://localhost/instaAccessToken",
+    //   params : data
+    // }).then(function(response){
+    //   console.log(response);
+    // });
     $scope.showSocialMedia();
     $scope.showInstagram(true);
   }

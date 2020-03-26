@@ -150,6 +150,9 @@
                             <div ng-show="facebookLoggedin" class="fb fb-loggedin">
                                 <button class="" ng-click="facebookLogout()">Logout of facebook</button>
                                 Welcome {{fbUserName}}
+                                <div class="fb-posts">
+                                    <p ng-repeat="post in fbPosts">{{post}}</p>
+                                </div>
                             </div>
                             <div ng-show="!facebookLoggedin" class="fb fb-loggedout">
                                 <button class="" ng-click="facebookLogin()">Connect with facebook</button>
