@@ -13,7 +13,10 @@
     <body ng-app="mainApp" ng-controller="mainController">
         <header>
             <div class="icon col-xs-3 col-md-3 col-sm-3 col-lg-3"> <img src="resources/iconTop.jpeg" alt="lovelytics icon"/></div>
-            <div class="text title col-xs-9 col-md-9 col-sm-9 col-lg-9">Analytics Portal</div>
+            <div class="text title col-xs-8 col-md-8 col-sm-8 col-lg-8">Analytics Portal</div>
+            <div class="logout col-xs-1 col-md-1 col-sm-1 col-lg-1">
+                <button ng-show="isLoggedin || adminLoggedin" ng-click="logout()">Logout</button>
+            </div>
         </header>
         <section ng-show="!isLoggedin && !adminLoggedin" class="login-page">
             <div ng-show="signin">
@@ -79,7 +82,7 @@
                                 <option>Only social media</option>
                             </select>
                         </td>
-                        <td><button>Remove</button></td>
+                        <td><button >Remove</button></td>
                     </tr>
                 </table>
             </div>

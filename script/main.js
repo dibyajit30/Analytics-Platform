@@ -36,6 +36,10 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
     $scope.purchaseAnalysis = false;
   }
 
+  $scope.logout = function(){
+    window.location.reload();
+  }
+
   $scope.facebookLogin = function(){
 
     var login = function(){
@@ -186,6 +190,16 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
       $http.get("resources/user_data.json").then(function(response){
         $scope.allUsers = response.data.users;
       });
+    }
+  }
+
+  $scope.removeUser = function(user){
+    var tempUsers = $scope.allUsers;
+    $scope.allUsers = [];
+    for(var i=0; i<tempUsers.length; i++){
+      if(tempUsers[i] !== user){
+        $scope.allUsers.push(tempUsers[i]);
+      }
     }
   }
 
