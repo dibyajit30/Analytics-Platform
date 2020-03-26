@@ -37,46 +37,38 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
   }
 
   $scope.facebookLogin = function(){
-    FB.login(function(response){
-      $scope.facebookLoginDetails = response; 
-      if($scope.facebookLoginDetails.status === 'connected'){
-        FB.api(
-          "/"+$scope.facebookLoginDetails.authResponse.userID,
-          function (response) {
-            if (response && !response.error) {
-              $scope.fbUserName = response.name;
+
+    var login = function(){
+      FB.login(function(response){
+        $scope.facebookLoginDetails = response; 
+        if($scope.facebookLoginDetails.status === 'connected'){
+          FB.api(
+            "/"+$scope.facebookLoginDetails.authResponse.userID,
+            function (response) {
+              if (response && !response.error) {
+                console.log(response);
+                $scope.fbUserName = response.name;
+              }
             }
-          }
-        );
-      }
-    }).then(function(){
+          );
+          FB.api(
+            "/"+$scope.facebookLoginDetails.authResponse.userID+"/post",
+            function (response) {
+              console.log(response);
+              if (response && !response.error) {
+                $scope.fbPosts = response;
+              }
+            }
+          );
+        }
+      });
+      return true;
+    }
+
+    login();
+    $timeout(function(){
       $scope.showFacebook();
-    });
-
-    // $timeout(function(){
-
-    // },5000);
-
-    // $timeout(function(){
-    //   if($scope.facebookLoginDetails.status === 'connected'){
-    //     console.log("connect");
-    //     FB.api(
-    //       "/"+$scope.facebookLoginDetails.authResponse.userID,
-    //       function (response) {
-    //         if (response && !response.error) {
-    //           console.log(response);
-    //           console.log(response.name);
-    //           $scope.fbUserName = response.name;
-    //         }
-    //       }
-    //     );
-        
-    //   }
-    //   else{
-    //     $scope.facebookLoggedin = false;
-    //   }
-    //   $scope.facebookLoggedin = true;
-    // },5000);
+    },5000);
   }
 
   $scope.facebookLogout = function(){
