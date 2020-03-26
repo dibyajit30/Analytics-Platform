@@ -15,7 +15,7 @@
             <div class="icon col-xs-3 col-md-3 col-sm-3 col-lg-3"> <img src="resources/iconTop.jpeg" alt="lovelytics icon"/></div>
             <div class="text title col-xs-9 col-md-9 col-sm-9 col-lg-9">Analytics Portal</div>
         </header>
-        <section ng-show="!isLoggedin" class="login-page">
+        <section ng-show="!isLoggedin && !adminLoggedin" class="login-page">
             <div ng-show="signin">
                 <p>Sign in</p>
                 <form name="signinForm" id="signinForm">
@@ -59,6 +59,29 @@
                     <input type="button" value="Sign in" ng-click="signin=true;adminSignin=false">
                     <input type="button" value="Sign up" ng-click="signup=true;adminSignin=false">
                 </p>
+            </div>
+        </section>
+        <section ng-show="adminLoggedin" class="admin-console">
+            <div>
+                <p>Welcome admin</p>
+                <table>
+                    <tr>
+                        <td>User ID</td>
+                        <td>Access control</td>
+                        <td>Remove account</td>
+                    </tr>
+                    <tr ng-repeat="user in allUsers">
+                        <td>{{user.id}}</td>
+                        <td>
+                            <select>
+                                <option>Full access</option>
+                                <option>Only tableau</option>
+                                <option>Only social media</option>
+                            </select>
+                        </td>
+                        <td><button>Remove</button></td>
+                    </tr>
+                </table>
             </div>
         </section>
         <section ng-show="isLoggedin" class="main-section">

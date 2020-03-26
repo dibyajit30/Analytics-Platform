@@ -39,26 +39,44 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
   $scope.facebookLogin = function(){
     FB.login(function(response){
       $scope.facebookLoginDetails = response; 
-    });
-    $timeout(function(){
       if($scope.facebookLoginDetails.status === 'connected'){
-        $scope.facebookLoggedin = true;
         FB.api(
           "/"+$scope.facebookLoginDetails.authResponse.userID,
           function (response) {
             if (response && !response.error) {
-              console.log(response);
-              console.log(response.name);
               $scope.fbUserName = response.name;
             }
           }
         );
+      }
+    }).then(function(){
+      $scope.showFacebook();
+    });
+
+    // $timeout(function(){
+
+    // },5000);
+
+    // $timeout(function(){
+    //   if($scope.facebookLoginDetails.status === 'connected'){
+    //     console.log("connect");
+    //     FB.api(
+    //       "/"+$scope.facebookLoginDetails.authResponse.userID,
+    //       function (response) {
+    //         if (response && !response.error) {
+    //           console.log(response);
+    //           console.log(response.name);
+    //           $scope.fbUserName = response.name;
+    //         }
+    //       }
+    //     );
         
-      }
-      else{
-        $scope.facebookLoggedin = false;
-      }
-    },5000);
+    //   }
+    //   else{
+    //     $scope.facebookLoggedin = false;
+    //   }
+    //   $scope.facebookLoggedin = true;
+    // },5000);
   }
 
   $scope.facebookLogout = function(){
@@ -163,7 +181,14 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
   }
 
   $scope.authenticateAdmin = function(){
-
+    var adminIn = document.getElementById("adminID").value;
+    var adminPassword = document.getElementById("adminPassword").value;
+    if(adminIn === "admin" && adminPassword === "admin"){
+      $scope.adminLoggedin = true;
+      $http.get("resources/user_data.json").then(function(response){
+        $scope.allUsers = response.data.users;
+      });
+    }
   }
 
   if(window.location.href.includes("code=")){
@@ -184,6 +209,7 @@ app.controller('mainController', function($scope, $timeout, $http, $document, $h
     $scope.showInstagram(true);
   }
   else{
+    $scope.adminLoggedin = false;
     $scope.isLoggedin = false;
     $scope.signin = true;
   }

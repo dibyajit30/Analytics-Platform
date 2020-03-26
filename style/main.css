@@ -58,3 +58,20 @@ section.main-section{
     color: #0000FF;
     cursor: pointer;
 }
+
+.admin-console div{
+    margin-top: 150px;
+    position: absolute;
+    margin-left: 30%;
+}
+
+.admin-console div table{
+    border: #2d4baa;
+    border-width: 2px;
+    border-style: solid;
+    padding: 10px;
+}
+
+.admin-console div table td{
+    padding: 5px;
+}
